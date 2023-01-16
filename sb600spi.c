@@ -53,6 +53,7 @@ enum amd_chipset {
 
 #define FIFO_SIZE_OLD		8
 #define FIFO_SIZE_YANGTZE	71
+uint8_t RZN32BM = 0;
 
 #define SPI100_CMD_CODE_REG	0x45
 #define SPI100_CMD_TRIGGER_REG	0x47
@@ -123,6 +124,11 @@ static enum amd_chipset determine_generation(struct pci_dev *dev)
 			return CHIPSET_AMD_UNKNOWN;
 		if (rev == 0x4a) {
 			msg_pdbg("Yangtze detected.\n");
+			return CHIPSET_YANGTZE;
+		} else if (rev == 0x51 || rev == 0x59 || rev == 0x61) {
+			//RZN32BM = mmio_readb(sb600_spibar + 0x50) & 0x1;
+			//amd_gen = CHIPSET_YANGTZE;
+			msg_pdbg("Ryzen detected.\n");
 			return CHIPSET_YANGTZE;
 		/**
 		 * FCH chipsets called 'Promontory' are one's with the
@@ -513,7 +519,14 @@ static int handle_speed(const struct programmer_cfg *cfg,
 		tmp = (mmio_readb(sb600_spibar + 0xd) >> 4) & 0x3;
 		msg_pdbg("NormSpeed is %s\n", spispeeds[tmp]);
 		if (spispeed_idx < 0) {
-			spispeed_idx = 3; /* Default to 16.5 MHz */
+	if (amd_gen >= CHIPSET_YANGTZE)
+	{
+		spispeed_idx = 1; /* Default to 33.3 MHz */
+	}
+	else
+	{
+		spispeed_idx = 3; /* Default to 16.5 MHz */
+	}
 		}
 	}
 	if (spispeed_idx < 0) {

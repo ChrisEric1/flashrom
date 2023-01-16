@@ -25,6 +25,8 @@
 
 #include "flash.h"	/* for chipaddr and flashctx */
 
+extern uint8_t RZN32BM;
+
 enum programmer_type {
 	PCI = 1, /* to detect uninitialized values */
 	USB,
@@ -60,6 +62,7 @@ extern const struct programmer_entry programmer_atapromise;
 extern const struct programmer_entry programmer_atavia;
 extern const struct programmer_entry programmer_buspirate_spi;
 extern const struct programmer_entry programmer_ch341a_spi;
+extern const struct programmer_entry programmer_vl805;
 extern const struct programmer_entry programmer_dediprog;
 extern const struct programmer_entry programmer_developerbox;
 extern const struct programmer_entry programmer_digilent_spi;

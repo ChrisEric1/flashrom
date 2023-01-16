@@ -152,6 +152,7 @@ DEPENDS_ON_LIBPCI := \
 	CONFIG_OGP_SPI \
 	CONFIG_SATAMV \
 	CONFIG_SATASII \
+	CONFIG_VL805 \
 
 DEPENDS_ON_LIBUSB1 := \
 	CONFIG_CH341A_SPI \
@@ -516,6 +517,9 @@ CONFIG_IT8212 ?= yes
 # Winchiphead CH341A
 CONFIG_CH341A_SPI ?= yes
 
+# Enable VIA VL805 programmer for now.
+CONFIG_VL805 ?= yes
+
 # Digilent Development board JTAG
 CONFIG_DIGILENT_SPI ?= yes
 
@@ -765,6 +769,11 @@ endif
 ifeq ($(CONFIG_CH341A_SPI), yes)
 FEATURE_FLAGS += -D'CONFIG_CH341A_SPI=1'
 PROGRAMMER_OBJS += ch341a_spi.o
+endif
+
+ifeq ($(CONFIG_VL805), yes)
+FEATURE_FLAGS += -D'CONFIG_VL805=1'
+PROGRAMMER_OBJS += vl805.o
 endif
 
 ifeq ($(CONFIG_DIGILENT_SPI), yes)

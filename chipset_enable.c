@@ -1772,7 +1772,7 @@ const struct penable chipset_enables[] = {
 	{0x1022, 0x7440, B_PFL,  OK,  "AMD", "AMD-768",				enable_flash_amd_768_8111},
 	{0x1022, 0x7468, B_PFL,  OK,  "AMD", "AMD-8111",			enable_flash_amd_768_8111},
 	{0x1022, 0x780e, B_FLS,  OK,  "AMD", "FCH",				enable_flash_sb600},
-	{0x1022, 0x790e, B_FLS,  OK,  "AMD", "FP4",				enable_flash_sb600},
+	{0x1022, 0x790e, B_FLS,  OK,  "AMD", "FP4/FP5/AM4",			enable_flash_sb600},
 	{0x1039, 0x0406, B_PFL,  NT,  "SiS", "501/5101/5501",			enable_flash_sis501},
 	{0x1039, 0x0496, B_PFL,  NT,  "SiS", "85C496+497",			enable_flash_sis85c496},
 	{0x1039, 0x0530, B_PFL,  OK,  "SiS", "530",				enable_flash_sis530},
@@ -2179,6 +2179,7 @@ const struct penable chipset_enables[] = {
 	{0x8086, 0x7a8d, B_S,    NT,  "Intel", "WM690",				enable_flash_pch600},
 	{0x8086, 0x7a8c, B_S,    NT,  "Intel", "HM670",				enable_flash_pch600},
 	{0x8086, 0x7e23, B_S,    DEP, "Intel", "Meteor Lake-P/M",		enable_flash_mtl},
+	{0x8086, 0xa3c8, B_S,    OK,  "Intel", "Comet Lake B460 LPC/eSPI",	enable_flash_pch400},
 #endif
 	{0},
 };
